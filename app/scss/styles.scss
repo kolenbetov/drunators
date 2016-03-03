@@ -1,0 +1,201 @@
+body {
+	background: green;
+}
+
+button {
+	cursor: pointer;
+}
+
+.height100 {
+	height: 100%;
+}
+
+.hidden {
+	display: none;
+}
+
+.disabled {
+	opacity: 0.6;
+	cursor: initial;
+}
+
+.arena {
+	border: 1px solid yellow;
+    margin: 0 auto;
+	height: 200px;
+	width: 80%;
+	position: relative;
+}
+
+.top-player {
+	height: 50%;
+
+	.slots {
+		bottom: 0;
+	}
+
+	.elements {
+		top: 0;
+	}
+} 
+
+.bottom-player {
+	height: 50%;
+
+	.slots {
+		top: 0;
+	}
+
+	.elements {
+		bottom: 0;
+	}
+} 
+
+#top-player-deck {
+	bottom: 0;
+}
+
+#bottom-player-deck {
+	top: 0;
+}
+
+.deck {
+	height: 40%;
+	width: 80%;
+	position: absolute;
+    background-color: black;
+	right: 0;
+	display: none;
+	z-index: 1;
+}
+
+.half {
+	height: 50%;
+}
+
+.avatar {
+	float: left;
+	width: 20%;
+    position: relative;
+}
+
+.actions {
+	display: inline-block;
+	width: 80%;
+	position: relative;
+}
+
+.elements {
+	height: 30%;
+	width: 100%;
+	position: absolute;
+}
+
+.element {
+	border: 1px solid white;
+	display: inline-block;
+	padding: 1px 5px;
+}
+
+.element button {
+	color: white;
+	background-image: url('../images/elements/earth.png');
+	background-repeat: no-repeat; 
+	background-size: contain;
+	cursor: pointer;
+	border: none;
+}
+
+button[disabled] {
+	opacity: 0.6;
+	cursor: initial;
+}
+
+.slots {
+	height: 70%;
+	width: 100%;
+	position: absolute;
+}
+
+.slot {
+	border: 1px solid white;
+	width: 18%;
+	display: inline-block;
+}
+
+.empty-slot {
+	background: grey;
+}
+
+.hero-image img {
+	width: auto;
+	height : auto;
+	max-height: 100%;
+	max-width: 100%;
+}
+
+.hero-name {
+	color: white;
+	position: absolute;
+}
+
+.end {
+	position: absolute;
+}
+
+.deck-wrapper {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	position: absolute;
+//	border: 10px solid black;
+	border-radius: 10px;
+	height: 100%;
+	width: 100%;
+
+	button {
+		border: none;
+		float: right;
+		background-color: black;
+		color: white;
+		height: inherit;
+		}
+}
+
+.cards {
+  position: absolute;
+  margin: 5px;
+}
+
+.card-in-deck {
+  display: inline-block;
+  position: relative;
+  width: 20%;
+}
+
+.card-in-deck img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.card-name {
+	position: absolute;
+	color: grey;
+	top: 0;
+}
+
+.creature-attack {
+	position: absolute;
+	color: grey;
+	bottom: 0;
+	left: 0;
+	border: 1px solid white;
+}
+
+.creature-health {
+	position: absolute;
+	color: grey;
+	bottom: 0;
+	right: 0;
+	border: 1px solid white;
+}
