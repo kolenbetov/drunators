@@ -1,11 +1,23 @@
 var React = require('react');
 var ItemTypes = require('./constants').ItemTypes;
 var DragSource = require('react-dnd').DragSource;
+var Card = require('./card');
 
 var cardSource = {
   beginDrag: function (props) {
-    return {};
-  }
+    return { card: props.card };
+  },
+
+	endDrag: function (props, monitor) {
+		if (monitor.didDrop()) {
+            let decks = document.querySelectorAll('[id$=-player-deck]');
+            [].forEach.call(decks, (deck) => {
+                if (deck.style.display !== 'none') {
+                    deck.style.display = 'none';
+                }
+            });
+		}
+	}
 };
 
 function collect(connect, monitor) {
@@ -21,11 +33,8 @@ const CardInDeck = React.createClass ({
     	var isDragging = this.props.isDragging;
 
 		return connectDragSource(
-		    <div className={'card-in-deck height100 ' + (this.props.disabled ? 'disabled' : '')} style={{opacity: isDragging ? 0.5 : 1}}>
-		    	<div> <img src="http://icons.iconarchive.com/icons/fasticon/creatures/512/orange-creature-icon.png" /></div>
-		    	<div className='creature-attack'> {this.props.card.attack} </div>
-		    	<div className='creature-health'> {this.props.card.health} </div>
-		    	<div className='card-name'> {this.props.card.name} </div>
+		    <div className={'card-in-deck height100 ' + (this.props.disabled ? 'disabled' : '')}>
+		    	<Card card={this.props.card} />
 		    </div>, {dropEffect: 'copy'}
 		);
 	}

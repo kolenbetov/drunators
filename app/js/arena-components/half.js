@@ -10,7 +10,7 @@ const Half = React.createClass({
 		return (
 			<div className={className} >
 				<Avatar name={hero.name} id={hero.id} />
-				<Actions elements={hero.elements} cards={hero.cards} slots={hero.slots} disabled={!hero.active} half={this.props.half} />
+				<Actions elements={hero.elements} cards={hero.cards} slots={hero.slots} half={this.props.half} disabled={!hero.active} />
 			</div>
 			);
 	}

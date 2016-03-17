@@ -1,5 +1,4 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
 var Cards = require('./cards');
 var renderSubtreeIntoContainer = require('react-dom').unstable_renderSubtreeIntoContainer;
 

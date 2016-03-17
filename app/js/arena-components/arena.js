@@ -13,12 +13,12 @@ const Arena = React.createClass({
 
     return (
       <div className="arena">
-		<Half hero={heroTop} half={'top'} />
-		<Deck player={'top'} hide={true} />
-		<Half hero={heroBottom} half={'bottom'} />
-		<Deck player={'bottom'} hide={true} />
-		<button className="end" onClick={this.onClick} text="End"> End Turn </button>
-	  </div>
+  		<Half hero={heroTop} half={'top'} />
+  		<Deck player={'top'} used_card={heroTop.used_card} />
+  		<Half hero={heroBottom} half={'bottom'} />
+  		<Deck player={'bottom'} used_card={heroBottom.used_card} />
+  		<button className="end" onClick={this.onClick} text="End"> End Turn </button>
+  	  </div>
     );
   },
 
@@ -33,6 +33,6 @@ const mapStateToProps = (state) => {
 	}
 }
 
-const ConnectedArena = connect(mapStateToProps)(Arena);
+// const ConnectedArena = connect(mapStateToProps)(Arena);
 
-export default DragDropContext(HTML5Backend)(ConnectedArena);
+export default connect(mapStateToProps)(DragDropContext(HTML5Backend)(Arena));

@@ -3,9 +3,9 @@ var React = require('react');
 const Deck = React.createClass ({
 	render: function () {	
 		return (
-			<div className='deck' id={this.props.player + '-player-deck'}> 
-				<div className='cards height100' id={this.props.player + '-player-cards'}> </div>
-
+			<div className='deck' id={this.props.player + '-player-deck'}>
+				<div className={this.props.used_card ? 'cards height100 disabled' : 'cards height100'} id={this.props.player + '-player-cards'}> </div>
+				<button onClick={this.handleClick}> X </button>
 			</div>
 		);
 	},
@@ -17,8 +17,5 @@ const Deck = React.createClass ({
 });
 
 module.exports = Deck;
-
-
-				// <div className='deck-wrapper'>
-				// 	<button onClick={this.handleClick}> X </button>
-				// </div>
+// <div className='deck-wrapper'>
+// </div>

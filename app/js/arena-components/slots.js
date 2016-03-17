@@ -9,7 +9,7 @@ var Slots = React.createClass ({
 		return (
 			<div className={className}>
 				{slots.map(function(slot, i){
-                    return (<Slot slot={slot} key={i} />);
+                    return (<Slot slot={slot} index={i} key={i} />);
                 })}
 			</div>
 		);

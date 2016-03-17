@@ -1,11 +1,19 @@
 var React = require('react');
 var ItemTypes = require('./constants').ItemTypes;
 var DropTarget = require('react-dnd').DropTarget;
-
+import { connect } from 'react-redux';
+import { putCreature } from '../actions/actions';
+var Card =require('./card');
+ 
 const slotTarget = {
-	drop: function () {
-		return {name: 'slot'}
-	}
+	drop: function (props, monitor) {
+        const draggedObject = monitor.getItem();
+        props.dispatch(putCreature(draggedObject.card, props.index));
+	},
+
+    canDrop: function (props, monitor) {
+       return props.slot === 'empty';
+    }
 };
 
 function collect(connect, monitor) {
@@ -20,7 +28,6 @@ var Slot = React.createClass ({
   renderOverlay: function (color) {
     return (
       <div style={{
-        position: 'absolute',
         top: 0,
         left: 0,
         height: '100%',
@@ -37,11 +44,12 @@ var Slot = React.createClass ({
 	const isOver = this.props.isOver;
 	const connectDropTarget = this.props.connectDropTarget;
 	const isActive = canDrop && isOver;
+        let slotValue = this.props.slot === 'empty' ? null : <Card card={this.props.slot} />;
 
 		return connectDropTarget(
-				<div className="slot height100 empty-slot"> {isActive ? this.renderOverlay('green') : this.props.slot} </div>
+				<div className="slot height100"> {slotValue} { isActive && this.renderOverlay('green') } </div>
 			);
 	}
 });
 
-module.exports = DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot);
+module.exports = connect()(DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot));
