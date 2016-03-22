@@ -9,7 +9,12 @@ export default class Creature {
         this.health = health;
     }
 
-    //attack(){}
+    attack(oppositeSlots, position) => {
+        oppositeSlots[position].health -= this.attack;
+        return oppositeSlots; 
+    };
+
+    //defence(){}
 
     //cast(){}
 }

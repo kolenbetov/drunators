@@ -6,7 +6,13 @@ import { earthCreatures } from '../creatures/air/ecreatures';
 import { lifeCreatures } from '../creatures/air/lcreatures';
 import { deathCreatures } from '../creatures/air/dcreatures';
 
-
+const heroAttack = (attack, defense) => {
+	attack.slots.forEach((slot, i) => {
+		if(slot !== empty) {
+			return slot.attack(defense.slots, i);
+		} 
+	})
+};
 
 const heroTop = {
 	id: "1",
@@ -43,10 +49,14 @@ const hero2 = {
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
 };
 
+
+
+
 export default function arena(state = [heroTop, hero2], action) {
 	switch (action.type) {
 		case END_TURN:
 			return state.map(hero => {
+				heroAttack(heroTop, hero2);
 				if (hero.active) {
 					for(let prop in hero.elements) {
 						hero.elements[prop] += 1;
