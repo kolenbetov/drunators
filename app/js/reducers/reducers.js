@@ -1,4 +1,12 @@
 import { END_TURN, PUT_CREATURE } from '../actions/actions';
+import { fireCreatures } from '../creatures/air/fcreatures';
+import { airCreatures } from '../creatures/air/acreatures';
+import { waterCreatures } from '../creatures/air/wcreatures';
+import { earthCreatures } from '../creatures/air/ecreatures';
+import { lifeCreatures } from '../creatures/air/lcreatures';
+import { deathCreatures } from '../creatures/air/dcreatures';
+
+
 
 const heroTop = {
 	id: "1",
@@ -13,7 +21,7 @@ const heroTop = {
 		life: 5,
 		death: 4
 	},
-	cards: [{type: 'creature', name: 'skeleton', element: 'death', cost: 2, attack: 2, health: 6}],
+	cards: [ ...fireCreatures, ...airCreatures, ...waterCreatures, ...earthCreatures, ...lifeCreatures, ...deathCreatures ]
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
 };
 
@@ -30,11 +38,7 @@ const hero2 = {
 		life: 3,
 		death: 5
 	},
-	cards: [
-		{type: 'creature', name: 'mermaid', element: 'water', cost: 3, attack: 2, health: 28},
-		{type: 'creature', name: 'poseidon', element: 'water', cost: 7, attack: 5, health: 18},
-		{type: 'creature', name: 'skeleton', element: 'death', cost: 2, attack: 2, health: 6}
-	],
+	cards: [ ...fireCreatures, ...airCreatures, ...waterCreatures, ...earthCreatures, ...lifeCreatures, ...deathCreatures ],
 	used_card: false,
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
 };

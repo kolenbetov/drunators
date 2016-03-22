@@ -6,4 +6,4 @@ const elemental = new Creature('life', 'elemental', 6, 4, 12);
 const bishop = new Creature('life', 'bishop', 9, 6, 24);
 const angel = new Creature('life', 'angel', 10, 5, 25);
 
- export default const airCreatures = [healer, monk, elemental, bishop, angel]
+ export default const lifeCreatures = [healer, monk, elemental, bishop, angel]

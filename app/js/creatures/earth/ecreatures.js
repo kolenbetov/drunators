@@ -6,4 +6,4 @@ const elemental = new Creature('earth', 'elemental', 6, 4, 12);
 const elf = new Creature('earth', 'elf', 9, 6, 24);
 const dragon = new Creature('earth', 'dragon', 10, 5, 25);
 
- export default const airCreatures = [snake, centaur, elemental, elf, dragon]
+ export default const earthCreatures = [snake, centaur, elemental, elf, dragon]
