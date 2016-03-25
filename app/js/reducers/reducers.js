@@ -6,14 +6,6 @@ import { earthCreatures } from '../creatures/air/ecreatures';
 import { lifeCreatures } from '../creatures/air/lcreatures';
 import { deathCreatures } from '../creatures/air/dcreatures';
 
-const heroAttack = (attack, defense) => {
-	attack.slots.forEach((slot, i) => {
-		if(slot !== empty) {
-			return slot.attack(defense.slots, i);
-		} 
-	})
-};
-
 const heroTop = {
 	id: "1",
 	name: "baltor",
@@ -50,10 +42,34 @@ const hero2 = {
 };
 
 
-
+const heroAttack = (attack, defense) => {
+	attack.slots.forEach((slot, i) => {
+		if(slot !== empty) {
+			return slot.attack(defense.slots, i);
+		} 
+	})
+};
 
 export default function arena(state = [heroTop, hero2], action) {
 	switch (action.type) {
+		case HERO_ATTACK: 
+			return state.map(hero => {
+				return hero;
+			});
+		
+
+		case CREATURE_ATTACK:
+			return state.map(hero => {
+				if (hero.active) {
+					hero.slots.forEach((slot, i) => {
+						if(slot !== empty) {
+							return slot.attack(defense.slots, i);
+						} 
+					});
+				}
+			});
+
+
 		case END_TURN:
 			return state.map(hero => {
 				heroAttack(heroTop, hero2);
