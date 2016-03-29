@@ -53,10 +53,23 @@ const heroAttack = (attack, defense) => {
 export default function arena(state = [heroTop, hero2], action) {
 	switch (action.type) {
 		case HERO_ATTACK: 
-			return state.map(hero => {
-				return hero;
+			var active;
+			var inactive;
+			state.forEach((hero, i) => {
+				if (hero.active) { active = i }
+				else if (!hero.active) {inactive = i }
 			});
+			heroAttack(state[active], state[inactive]);
 		
+		case SLOT_ATTACK:
+			var active;
+			var inactive;
+			state.forEach((hero, i) => {
+				if (hero.active) { active = i }
+				else if (!hero.active) {inactive = i }
+			});
+			heroAttack(state[active], state[inactive]);
+
 
 		case CREATURE_ATTACK:
 			return state.map(hero => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { endTurn } from '../actions/actions';
+import { endTurn, heroAttack } from '../actions/actions';
 var HTML5Backend = require('react-dnd-html5-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
 var Deck = require('./deck');
@@ -23,7 +23,7 @@ const Arena = React.createClass({
   },
 
   onClick: function () {
-  	this.props.dispatch(endTurn());
+  	this.props.dispatch(heroAttack());
   }
 });
 
