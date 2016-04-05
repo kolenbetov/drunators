@@ -6,4 +6,6 @@ const lich = new Creature('death', 'lich', 6, 4, 12);
 const sorcerer = new Creature('death', 'sorcerer', 9, 6, 24);
 const darkKnigth = new Creature('death', 'dark knight', 10, 5, 25);
 
- export default const deathCreatures = [skeleton, zombie, lich, sorcerer, darkKnigth]
+const deathCreatures = [skeleton, zombie, lich, sorcerer, darkKnigth];
+
+ export default deathCreatures;

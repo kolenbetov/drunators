@@ -9,7 +9,7 @@ export default class Creature {
         this.health = health;
     }
 
-    attack(oppositeSlots, position) => {
+    attack(oppositeSlots, position) {
         oppositeSlots[position].health -= this.attack;
         return oppositeSlots; 
     };

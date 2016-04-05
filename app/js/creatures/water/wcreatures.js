@@ -6,4 +6,6 @@ const toad = new Creature('water', 'toad', 6, 4, 12);
 const poseidon = new Creature('water', 'poseidon', 9, 6, 24);
 const hydra = new Creature('water', 'hydra', 10, 5, 25);
 
- export default const waterCreatures = [shark, mermaid, toad, poseidon, hydra]
+const waterCreatures = [shark, mermaid, toad, poseidon, hydra];
+
+export default waterCreatures;

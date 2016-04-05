@@ -1,10 +1,10 @@
-import { END_TURN, PUT_CREATURE } from '../actions/actions';
-import { fireCreatures } from '../creatures/air/fcreatures';
-import { airCreatures } from '../creatures/air/acreatures';
-import { waterCreatures } from '../creatures/air/wcreatures';
-import { earthCreatures } from '../creatures/air/ecreatures';
-import { lifeCreatures } from '../creatures/air/lcreatures';
-import { deathCreatures } from '../creatures/air/dcreatures';
+import { END_TURN, PUT_CREATURE, HERO_ATTACK } from '../actions/actions';
+import  fireCreatures  from '../creatures/fire/fcreatures';
+import  airCreatures  from '../creatures/air/acreatures';
+import  waterCreatures  from '../creatures/water/wcreatures';
+import  earthCreatures  from '../creatures/earth/ecreatures';
+import  lifeCreatures  from '../creatures/life/lcreatures';
+import  deathCreatures  from '../creatures/death/dcreatures';
 
 const heroTop = {
 	id: "1",
@@ -19,7 +19,8 @@ const heroTop = {
 		life: 5,
 		death: 4
 	},
-	cards: [ ...fireCreatures, ...airCreatures, ...waterCreatures, ...earthCreatures, ...lifeCreatures, ...deathCreatures ]
+	cards: [ ...fireCreatures, ...airCreatures, ...waterCreatures, ...earthCreatures, ...lifeCreatures, ...deathCreatures ],
+	used_card: false,
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
 };
 
@@ -44,7 +45,7 @@ const hero2 = {
 
 const heroAttack = (attack, defense) => {
 	attack.slots.forEach((slot, i) => {
-		if(slot !== empty) {
+		if(slot !== 'empty') {
 			return slot.attack(defense.slots, i);
 		} 
 	})
@@ -61,26 +62,26 @@ export default function arena(state = [heroTop, hero2], action) {
 			});
 			heroAttack(state[active], state[inactive]);
 		
-		case SLOT_ATTACK:
-			var active;
-			var inactive;
-			state.forEach((hero, i) => {
-				if (hero.active) { active = i }
-				else if (!hero.active) {inactive = i }
-			});
-			heroAttack(state[active], state[inactive]);
+		// case SLOT_ATTACK:
+		// 	var active;
+		// 	var inactive;
+		// 	state.forEach((hero, i) => {
+		// 		if (hero.active) { active = i }
+		// 		else if (!hero.active) {inactive = i }
+		// 	});
+		// 	heroAttack(state[active], state[inactive]);
 
 
-		case CREATURE_ATTACK:
-			return state.map(hero => {
-				if (hero.active) {
-					hero.slots.forEach((slot, i) => {
-						if(slot !== empty) {
-							return slot.attack(defense.slots, i);
-						} 
-					});
-				}
-			});
+		// case CREATURE_ATTACK:
+		// 	return state.map(hero => {
+		// 		if (hero.active) {
+		// 			hero.slots.forEach((slot, i) => {
+		// 				if(slot !== empty) {
+		// 					return slot.attack(defense.slots, i);
+		// 				} 
+		// 			});
+		// 		}
+		// 	});
 
 
 		case END_TURN:

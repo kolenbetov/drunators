@@ -6,4 +6,6 @@ const elemental = new Creature('fire', 'elemental', 6, 4, 12);
 const phoenix = new Creature('fire', 'phoenix', 9, 6, 24);
 const devil = new Creature('fire', 'devil', 10, 5, 25);
 
- export default const fireCreatures = [demon, cerber, elemental, phoenix, devil]
+ const fireCreatures = [demon, cerber, elemental, phoenix, devil];
+
+ export default fireCreatures;

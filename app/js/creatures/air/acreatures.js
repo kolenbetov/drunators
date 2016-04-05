@@ -6,4 +6,6 @@ const elemental = new Creature('air', 'elemental', 6, 4, 12);
 const thunderbird = new Creature('air', 'thunderbird', 9, 6, 24);
 const winder = new Creature('air', 'winder', 10, 5, 25);
 
- export default const airCreatures = [fairy, cloud, elemental, thunderbird, winder]
+const airCreatures = [fairy, cloud, elemental, thunderbird, winder];
+
+export default airCreatures;
