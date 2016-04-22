@@ -13,17 +13,18 @@ const Arena = React.createClass({
 
     return (
       <div className="arena">
-  		<Half hero={heroTop} half={'top'} />
-  		<Deck player={'top'} used_card={heroTop.used_card} />
-  		<Half hero={heroBottom} half={'bottom'} />
-  		<Deck player={'bottom'} used_card={heroBottom.used_card} />
-  		<button className="end" onClick={this.onClick} text="End"> End Turn </button>
+  		  <Half hero={heroTop} half={'top'} />
+  		  <Deck player={'top'} used_card={heroTop.used_card} />
+  		  <Half hero={heroBottom} half={'bottom'} />
+  		  <Deck player={'bottom'} used_card={heroBottom.used_card} />
+  		  <button className="end" onClick={this.onClick} text="End"> End Turn </button>
   	  </div>
     );
   },
 
   onClick: function () {
   	this.props.dispatch(heroAttack());
+    this.props.dispatch(endTurn());
   }
 });
 
@@ -32,7 +33,5 @@ const mapStateToProps = (state) => {
 		heroes: state
 	}
 }
-
-// const ConnectedArena = connect(mapStateToProps)(Arena);
 
 export default connect(mapStateToProps)(DragDropContext(HTML5Backend)(Arena));

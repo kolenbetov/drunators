@@ -7,13 +7,29 @@ export default class Creature {
         this.cost = cost;
         this.attack = attack;
         this.health = health;
+        this.firstTurn = true;
     }
 
-    attack(oppositeSlots, position) {
-        oppositeSlots[position].health -= this.attack;
-        return oppositeSlots; 
+    doDie(slot) {
+        slot = 'empty';
+        return slot;
     };
 
+    doAttack(oppositeHero, position) {
+        if(oppositeHero.slots[position] === 'empty') {
+            oppositeHero.health -= this.attack;
+            console.log('hero been hit by: ' + this.attack + ' hero health is: ' + oppositeHero.health);
+        } else {
+            oppositeHero.slots[position].health -= this.attack;
+            if (oppositeHero.slots[position].health <= 0) {
+                oppositeHero.slots[position] = 'empty';
+                // doDie(oppositeHero.slots[position]);
+            }
+            console.log('creature been hit by: ' + this.attack + ' creature health is: ' + oppositeHero.slots[position].health);
+
+        }
+        return oppositeHero; 
+    };
     //defence(){}
 
     //cast(){}

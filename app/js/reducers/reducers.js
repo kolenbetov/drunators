@@ -43,12 +43,13 @@ const hero2 = {
 };
 
 
-const heroAttack = (attack, defense) => {
-	attack.slots.forEach((slot, i) => {
+const heroAttack = (state, attack, defense) => {
+	state[attack].slots.forEach((slot, i) => {
 		if(slot !== 'empty') {
-			return slot.attack(defense.slots, i);
+			slot.firstTurn ? slot.firstTurn = false : slot.doAttack(state[defense], i);
 		} 
-	})
+	});
+	return state;
 };
 
 export default function arena(state = [heroTop, hero2], action) {
@@ -60,7 +61,7 @@ export default function arena(state = [heroTop, hero2], action) {
 				if (hero.active) { active = i }
 				else if (!hero.active) {inactive = i }
 			});
-			heroAttack(state[active], state[inactive]);
+			return heroAttack(state, active, inactive);
 		
 		// case SLOT_ATTACK:
 		// 	var active;
@@ -86,7 +87,6 @@ export default function arena(state = [heroTop, hero2], action) {
 
 		case END_TURN:
 			return state.map(hero => {
-				heroAttack(heroTop, hero2);
 				if (hero.active) {
 					for(let prop in hero.elements) {
 						hero.elements[prop] += 1;

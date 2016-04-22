@@ -10,7 +10,7 @@ module.exports = React.createClass ({
 						<img src={image} alt={this.props.name} />
 					</div>
 					<div className="hero-name bottom">
-						{this.props.name}
+						{this.props.name} {this.props.health}
 					</div>
 				</div>
 			);
