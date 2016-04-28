@@ -1,5 +1,5 @@
 body {
-	background: green;
+	background: #343637;
 }
 
 button {
@@ -23,7 +23,7 @@ button {
 .arena {
 	border: 1px solid yellow;
     margin: 0 auto;
-	height: 200px;
+	height: 300px;
 	width: 80%;
 	position: relative;
 }
@@ -127,10 +127,12 @@ button[disabled] {
 }
 
 .slot {
-	border: 1px solid white;
+	border: 1px solid #403F3F;
 	width: 18%;
 	display: inline-block;
-	background: grey;
+	background-image: url('../images/bg.png');
+	background-size: 100%;
+	background-color: grey;
 }
 
 .empty-slot {
@@ -241,24 +243,26 @@ transition: all 0.7s ease;
 
 .card-name {
 	position: absolute;
-	color: grey;
+	color: #403F3F;
 	top: 0;
 }
 
 .creature-attack {
 	position: absolute;
-	color: grey;
+	color: red;
 	bottom: 0;
 	left: 0;
 	border: 1px solid white;
+	border-radius: 50%
 }
 
 .creature-health {
 	position: absolute;
-	color: grey;
+	color: gold;
 	bottom: 0;
 	right: 0;
 	border: 1px solid white;
+	border-radius: 50%
 }
 
 
