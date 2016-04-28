@@ -1,12 +1,13 @@
 export default class Creature {
 
-    constructor(element, name, cost, attack, health){
+    constructor(element, name, cost, attack, health, img){
         this.type = 'creature';
         this.element = element;
         this.name = name;
         this.cost = cost;
         this.attack = attack;
         this.health = health;
+        this.img = img;
         this.firstTurn = true;
     }
 

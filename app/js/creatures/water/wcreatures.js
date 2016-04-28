@@ -1,11 +1,48 @@
-import Creature from '../creature';
+const octopus = {
+	element: 'water',
+	name: 'octopus',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/Tentacles-creature-icon.png'
+};
 
-const shark = new Creature('water', 'shark', 2, 2, 10);
-const mermaid = new Creature('water', 'mermaid', 4, 4, 14);
-const toad = new Creature('water', 'toad', 6, 4, 12);
-const poseidon = new Creature('water', 'poseidon', 9, 6, 24);
-const hydra = new Creature('water', 'hydra', 10, 5, 25);
+const mermaid = {
+	element: 'water',
+	name: 'mermaid',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/Cheeks-Creature-icon.png'
+};
 
-const waterCreatures = [shark, mermaid, toad, poseidon, hydra];
+const toad = {
+	element: 'water',
+	name: 'toad',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/cartoon-red-creature.jpg'
+};
+
+const poseidon = {
+	element: 'water',
+	name: 'poseidon',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/blue-creature-icon.png'
+};
+
+const hydra = {
+	element: 'water',
+	name: 'hydra',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/red-creature-icon.png'
+};
+
+const waterCreatures = [octopus, mermaid, toad, poseidon, hydra];
 
 export default waterCreatures;

@@ -44,11 +44,11 @@ var Slot = React.createClass ({
 	const isOver = this.props.isOver;
 	const connectDropTarget = this.props.connectDropTarget;
 	const isActive = canDrop && isOver;
-        let slotValue = this.props.slot === 'empty' ? null : <Card card={this.props.slot} />;
+  let slotValue = this.props.slot === 'empty' ? null : <Card card={this.props.slot} />;
 
 		return connectDropTarget(
-				<div className="slot height100"> {slotValue} { isActive && this.renderOverlay('green') } </div>
-			);
+				<div className="slot height100"> {slotValue} { isActive && this.renderOverlay('white') } </div>
+		);
 	}
 });
 
