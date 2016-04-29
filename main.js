@@ -73,7 +73,7 @@ var Actions = React.createClass({
 			'div',
 			{ className: 'actions height100' },
 			React.createElement(Elements, { elements: this.props.elements, cards: this.props.cards, half: this.props.half, disabled: this.props.disabled }),
-			React.createElement(Slots, { slots: this.props.slots })
+			React.createElement(Slots, { slots: this.props.slots, dropCard: this.props.dropCard })
 		);
 	}
 });
@@ -112,9 +112,9 @@ var Arena = _react2.default.createClass({
     return _react2.default.createElement(
       'div',
       { className: 'arena' },
-      _react2.default.createElement(Half, { hero: heroTop, half: 'top' }),
+      _react2.default.createElement(Half, { hero: heroTop, half: 'top', dropCard: this.props.onDropCard }),
       _react2.default.createElement(Deck, { player: 'top', used_card: heroTop.used_card }),
-      _react2.default.createElement(Half, { hero: heroBottom, half: 'bottom' }),
+      _react2.default.createElement(Half, { hero: heroBottom, half: 'bottom', dropCard: this.props.onDropCard }),
       _react2.default.createElement(Deck, { player: 'bottom', used_card: heroBottom.used_card }),
       _react2.default.createElement(
         'button',
@@ -125,8 +125,8 @@ var Arena = _react2.default.createClass({
   },
 
   onClick: function onClick() {
-    this.props.dispatch((0, _actions.heroAttack)());
-    this.props.dispatch((0, _actions.endTurn)());
+    this.props.heroAttack();
+    this.props.endTurn();
   }
 });
 
@@ -136,7 +136,21 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(DragDropContext(HTML5Backend)(Arena));
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onDropCard: function onDropCard(card, index) {
+      dispatch((0, _actions.putCreature)(card, index));
+    },
+    heroAttack: function heroAttack() {
+      dispatch((0, _actions.heroAttack)());
+    },
+    endTurn: function endTurn() {
+      dispatch((0, _actions.endTurn)());
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(Arena));
 
 },{"../actions/actions":1,"./deck":10,"./half":13,"react":402,"react-dnd":126,"react-dnd-html5-backend":33,"react-redux":230}],5:[function(require,module,exports){
 'use strict';
@@ -226,46 +240,37 @@ var Card = React.createClass({
 	displayName: 'Card',
 
 	render: function render() {
-		var name = this.props.card.name;
-		var attack = this.props.card.attack;
-		var health = this.props.card.health;
-		var img = this.props.card.img;
-
 		return React.createElement(
 			'div',
-			{ className: 'card height100', onClick: this.onClick },
+			{ className: 'card height100', onMouseOver: this.onMouseOver },
 			React.createElement(
 				'div',
 				null,
 				' ',
-				React.createElement('img', { src: img })
+				React.createElement('img', { src: this.props.card.img })
 			),
 			React.createElement(
 				'div',
 				{ className: 'creature-attack' },
 				' ',
-				attack,
+				this.props.card.attack,
 				' '
 			),
 			React.createElement(
 				'div',
 				{ className: 'creature-health' },
 				' ',
-				health,
+				this.props.card.health,
 				' '
 			),
 			React.createElement(
 				'div',
 				{ className: 'card-name' },
 				' ',
-				name,
+				this.props.card.name,
 				' '
 			)
 		);
-	},
-
-	onClick: function onClick() {
-		this.forceUpdate();
 	}
 });
 
@@ -428,7 +433,7 @@ var Half = React.createClass({
 			'div',
 			{ className: className },
 			React.createElement(Avatar, { name: hero.name, id: hero.id, health: hero.health }),
-			React.createElement(Actions, { elements: hero.elements, cards: hero.cards, slots: hero.slots, half: this.props.half, disabled: !hero.active })
+			React.createElement(Actions, { elements: hero.elements, cards: hero.cards, slots: hero.slots, half: this.props.half, disabled: !hero.active, dropCard: this.props.dropCard })
 		);
 	}
 });
@@ -451,7 +456,7 @@ var Card = require('./card');
 var slotTarget = {
   drop: function drop(props, monitor) {
     var draggedObject = monitor.getItem();
-    props.dispatch((0, _actions.putCreature)(draggedObject.card, props.index));
+    props.dropCard(draggedObject.card, props.index);
   },
 
   canDrop: function canDrop(props, monitor) {
@@ -501,7 +506,8 @@ var Slot = React.createClass({
   }
 });
 
-module.exports = (0, _reactRedux.connect)()(DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot));
+module.exports = DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot);
+// module.exports = connect()(DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot));
 
 },{"../actions/actions":1,"./card":7,"./constants":9,"react":402,"react-dnd":126,"react-redux":230}],15:[function(require,module,exports){
 'use strict';
@@ -514,13 +520,14 @@ var Slots = React.createClass({
 
 	render: function render() {
 		var slots = this.props.slots;
+		var dropCard = this.props.dropCard;
 		var className = 'slots';
 
 		return React.createElement(
 			'div',
 			{ className: className },
 			slots.map(function (slot, i) {
-				return React.createElement(Slot, { slot: slot, index: i, key: i });
+				return React.createElement(Slot, { slot: slot, index: i, key: i, dropCard: dropCard });
 			})
 		);
 	}
@@ -583,11 +590,6 @@ var Creature = function () {
     }
 
     _createClass(Creature, [{
-        key: 'createCreature',
-        value: function createCreature(card) {
-            return new Creature(card.element, card.name, card.cost, card.attack, card.health, card.img);
-        }
-    }, {
         key: 'doDie',
         value: function doDie(slot) {
             slot = 'empty';

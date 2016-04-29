@@ -10,10 +10,6 @@ const Card = React.createClass ({
 		    	<div className='card-name'> {this.props.card.name} </div>
 		    </div>
 		)
-	},
-
-	onMouseOver: function () {
-		this.forceUpdate();
 	}
 });
 

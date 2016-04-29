@@ -3,12 +3,12 @@ var ItemTypes = require('./constants').ItemTypes;
 var DropTarget = require('react-dnd').DropTarget;
 import { connect } from 'react-redux';
 import { putCreature } from '../actions/actions';
-var Card =require('./card');
+var Card = require('./card');
  
 const slotTarget = {
 	drop: function (props, monitor) {
         const draggedObject = monitor.getItem();
-        props.dispatch(putCreature(draggedObject.card, props.index));
+        props.dropCard(draggedObject.card, props.index);
 	},
 
     canDrop: function (props, monitor) {
@@ -52,4 +52,5 @@ var Slot = React.createClass ({
 	}
 });
 
-module.exports = connect()(DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot));
+module.exports = DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot);
+// module.exports = connect()(DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot));

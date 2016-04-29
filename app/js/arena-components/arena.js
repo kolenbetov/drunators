@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { endTurn, heroAttack } from '../actions/actions';
+import { endTurn, heroAttack, putCreature } from '../actions/actions';
 var HTML5Backend = require('react-dnd-html5-backend');
 var DragDropContext = require('react-dnd').DragDropContext;
 var Deck = require('./deck');
@@ -13,9 +13,9 @@ const Arena = React.createClass({
 
     return (
       <div className="arena">
-  		  <Half hero={heroTop} half={'top'} />
+  		  <Half hero={heroTop} half={'top'} dropCard={this.props.onDropCard}/>
   		  <Deck player={'top'} used_card={heroTop.used_card} />
-  		  <Half hero={heroBottom} half={'bottom'} />
+  		  <Half hero={heroBottom} half={'bottom'} dropCard={this.props.onDropCard}/>
   		  <Deck player={'bottom'} used_card={heroBottom.used_card} />
   		  <button className="end" onClick={this.onClick} text="End"> End Turn </button>
   	  </div>
@@ -23,15 +23,29 @@ const Arena = React.createClass({
   },
 
   onClick: function () {
-  	this.props.dispatch(heroAttack());
-    this.props.dispatch(endTurn());
+  	this.props.heroAttack();
+    this.props.endTurn();
   }
 });
 
 const mapStateToProps = (state) => {
 	return {
 		heroes: state
-	}
-}
+	};
+};
 
-export default connect(mapStateToProps)(DragDropContext(HTML5Backend)(Arena));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onDropCard: (card, index) => {
+      dispatch(putCreature(card, index)) 
+    },
+    heroAttack: () => {
+      dispatch(heroAttack())
+    },
+    endTurn: () => {
+      dispatch(endTurn())
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(Arena));

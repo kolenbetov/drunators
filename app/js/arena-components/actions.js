@@ -7,7 +7,7 @@ const Actions = React.createClass({
 		return (
 			<div className="actions height100">
 				<Elements elements={this.props.elements} cards={this.props.cards} half={this.props.half} disabled={this.props.disabled} />
-				<Slots slots={this.props.slots} />
+				<Slots slots={this.props.slots} dropCard={this.props.dropCard} />
 			</div>
 		);
 	}
