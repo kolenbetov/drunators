@@ -1,7 +1,7 @@
-var React = require('react');
-var ItemTypes = require('./constants').ItemTypes;
-var DragSource = require('react-dnd').DragSource;
-var Card = require('./card');
+import React from 'react';
+import { ItemTypes } from './constants';
+import { DragSource } from 'react-dnd';
+import Card from './card';
 
 var cardSource = {
   beginDrag: function (props) {
@@ -27,8 +27,8 @@ function collect(connect, monitor) {
   }
 }
 
-const CardInDeck = React.createClass ({
-	render: function () {	
+class CardInDeck extends React.Component{
+	render() {	
 	    var connectDragSource = this.props.connectDragSource;
     	var isDragging = this.props.isDragging;
 
@@ -38,6 +38,6 @@ const CardInDeck = React.createClass ({
 		    </div>, {dropEffect: 'copy'}
 		);
 	}
-});
+};
 
-module.exports = DragSource(ItemTypes.CARD, cardSource, collect)(CardInDeck);
+export default DragSource(ItemTypes.CARD, cardSource, collect)(CardInDeck);

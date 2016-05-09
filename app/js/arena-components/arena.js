@@ -1,32 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { endTurn, heroAttack, putCreature } from '../actions/actions';
-var HTML5Backend = require('react-dnd-html5-backend');
-var DragDropContext = require('react-dnd').DragDropContext;
-var Deck = require('./deck');
-var Half = require('./half');
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
+import Deck from './deck';
+import Half from './half';
 
-const Arena = React.createClass({
-  render: function() {
+class Arena extends React.Component{
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  render() {
   	const heroTop = this.props.heroes[0];
   	const heroBottom = this.props.heroes[1];
 
     return (
       <div className="arena">
-  		  <Half hero={heroTop} half={'top'} dropCard={this.props.onDropCard}/>
+  		  <Half hero={heroTop} half={'top'} dropCard={this.props.onDropCard} />
   		  <Deck player={'top'} used_card={heroTop.used_card} />
-  		  <Half hero={heroBottom} half={'bottom'} dropCard={this.props.onDropCard}/>
+  		  <Half hero={heroBottom} half={'bottom'} dropCard={this.props.onDropCard} />
   		  <Deck player={'bottom'} used_card={heroBottom.used_card} />
-  		  <button className="end" onClick={this.onClick} text="End"> End Turn </button>
+  		  <button className="end" onClick={this.handleClick} text="End"> End Turn </button>
   	  </div>
     );
-  },
+  }
 
-  onClick: function () {
+  handleClick() {
   	this.props.heroAttack();
     this.props.endTurn();
   }
-});
+};
 
 const mapStateToProps = (state) => {
 	return {

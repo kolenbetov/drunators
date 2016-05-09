@@ -1,8 +1,8 @@
-var React = require('react');
-var Slot = require('./slot');
+import React from 'react';
+import Slot from './slot';
 
-var Slots = React.createClass ({
-	render: function () {
+export default class Slots extends React.Component {
+	render() {
 		const slots = this.props.slots;
 		const dropCard = this.props.dropCard;
 		const className = 'slots';
@@ -15,6 +15,9 @@ var Slots = React.createClass ({
 			</div>
 		);
 	}
-});
 
-module.exports = Slots;
+  	componentWillReceiveProps(nextProps) {      
+    	console.log(nextProps.slots);
+    	console.log(this.props.slots);
+  	}
+};

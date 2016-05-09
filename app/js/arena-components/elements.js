@@ -1,8 +1,8 @@
-var React = require('react');
-var Element = require('./element');
+import React from 'react';
+import Element from './element';
 
-const Elements = React.createClass ({
-	render: function () {
+export default class Elements extends React.Component{
+	render() {
 		const elements = this.props.elements;
 		const className = 'elements';
 		const cards = this.props.cards;
@@ -21,6 +21,4 @@ const Elements = React.createClass ({
 			</div>
 		);
 	}
-});
-
-module.exports = Elements;
+};
