@@ -12,7 +12,7 @@ export default class Card extends React.Component{
 		)
 	}
 
-  	// componentWillReceiveProps: function(nextProps) {      
+  	// componentWillReceiveProps(nextProps) {      
    //  	console.log(nextProps.card.health + '---' + this.props.card.health);
   	// }
 };

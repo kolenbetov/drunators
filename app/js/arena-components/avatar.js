@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 export default class Avatar extends React.Component{
 	render() {
@@ -15,4 +15,10 @@ export default class Avatar extends React.Component{
 				</div>
 		);
 	}
+};
+
+Avatar.propTypes = {
+	id: PropTypes.string.isRequired,
+	name: PropTypes.string.isRequired,
+	health: PropTypes.number.isRequired
 };

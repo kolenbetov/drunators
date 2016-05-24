@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { endTurn, heroAttack, putCreature } from '../actions/actions';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -31,6 +31,22 @@ class Arena extends React.Component{
   	this.props.heroAttack();
     this.props.endTurn();
   }
+};
+
+Arena.propTypes = {
+  heroes: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        health: PropTypes.number.isRequired,
+        active: PropTypes.bool.isRequired,
+        elements: PropTypes.object.isRequired,
+        cards: PropTypes.array.isRequired,
+        used_card: PropTypes.bool.isRequired,
+        slots: PropTypes.array.isRequired,
+      }).isRequired
+    ).isRequired,
+  onDropCard: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => {

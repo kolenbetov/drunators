@@ -20,7 +20,6 @@ const heroTop = {
 		life: 5,
 		death: 4
 	},
-	// cards: [waterCreatures],
 	cards: [ ...fireCreatures, ...airCreatures, ...waterCreatures, ...earthCreatures, ...lifeCreatures, ...deathCreatures ],
 	used_card: false,
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
@@ -39,7 +38,6 @@ const hero2 = {
 		life: 3,
 		death: 5
 	},
-	// cards: [waterCreatures],
 	cards: [ ...fireCreatures, ...airCreatures, ...waterCreatures, ...earthCreatures, ...lifeCreatures, ...deathCreatures ],
 	used_card: false,
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']

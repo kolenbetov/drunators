@@ -114,6 +114,22 @@ var Actions = function (_React$Component) {
 exports.default = Actions;
 ;
 
+Actions.propTypes = {
+	elements: _react.PropTypes.shape({
+		earth: _react.PropTypes.number.isRequired,
+		water: _react.PropTypes.number.isRequired,
+		air: _react.PropTypes.number.isRequired,
+		fire: _react.PropTypes.number.isRequired,
+		life: _react.PropTypes.number.isRequired,
+		death: _react.PropTypes.number.isRequired
+	}).isRequired,
+	cards: _react.PropTypes.arrayOf(_react.PropTypes.object.isRequired).isRequired,
+	half: _react.PropTypes.string.isRequired,
+	disabled: _react.PropTypes.bool.isRequired,
+	slots: _react.PropTypes.oneOfType([_react.PropTypes.string.isRequired, _react.PropTypes.object.isRequired]).isRequired,
+	dropCard: _react.PropTypes.func.isRequired
+};
+
 },{"./elements":12,"./slots":15,"react":402}],4:[function(require,module,exports){
 'use strict';
 
@@ -198,6 +214,20 @@ var Arena = function (_React$Component) {
 
 ;
 
+Arena.propTypes = {
+  heroes: _react.PropTypes.arrayOf(_react.PropTypes.shape({
+    id: _react.PropTypes.string.isRequired,
+    name: _react.PropTypes.string.isRequired,
+    health: _react.PropTypes.number.isRequired,
+    active: _react.PropTypes.bool.isRequired,
+    elements: _react.PropTypes.object.isRequired,
+    cards: _react.PropTypes.array.isRequired,
+    used_card: _react.PropTypes.bool.isRequired,
+    slots: _react.PropTypes.array.isRequired
+  }).isRequired).isRequired,
+  onDropCard: _react.PropTypes.func.isRequired
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
     heroes: state
@@ -279,6 +309,12 @@ var Avatar = function (_React$Component) {
 
 exports.default = Avatar;
 ;
+
+Avatar.propTypes = {
+	id: _react.PropTypes.string.isRequired,
+	name: _react.PropTypes.string.isRequired,
+	health: _react.PropTypes.number.isRequired
+};
 
 },{"react":402}],6:[function(require,module,exports){
 'use strict';
@@ -429,7 +465,7 @@ var Card = function (_React$Component) {
 			);
 		}
 
-		// componentWillReceiveProps: function(nextProps) {     
+		// componentWillReceiveProps(nextProps) {     
 		//  	console.log(nextProps.card.health + '---' + this.props.card.health);
 		// }
 
@@ -761,6 +797,11 @@ var Half = function (_React$Component) {
 				_react2.default.createElement(_actions2.default, { elements: hero.elements, cards: hero.cards, slots: hero.slots, half: this.props.half, disabled: !hero.active, dropCard: this.props.dropCard })
 			);
 		}
+
+		// componentWillReceiveProps(nextProps) {     
+		//    	console.log(nextProps.hero.health + '---' + this.props.hero.health);
+		//  	}
+
 	}]);
 
 	return Half;
@@ -768,6 +809,21 @@ var Half = function (_React$Component) {
 
 exports.default = Half;
 ;
+
+Half.propTypes = {
+	hero: _react.PropTypes.shape({
+		id: _react.PropTypes.string.isRequired,
+		name: _react.PropTypes.string.isRequired,
+		health: _react.PropTypes.number.isRequired,
+		active: _react.PropTypes.bool.isRequired,
+		elements: _react.PropTypes.object.isRequired,
+		cards: _react.PropTypes.array.isRequired,
+		used_card: _react.PropTypes.bool.isRequired,
+		slots: _react.PropTypes.array.isRequired
+	}).isRequired,
+	half: _react.PropTypes.string.isRequired,
+	dropCard: _react.PropTypes.func.isRequired
+};
 
 },{"./actions":3,"./avatar":5,"react":402}],14:[function(require,module,exports){
 'use strict';
@@ -918,12 +974,6 @@ var Slots = function (_React$Component) {
 					return _react2.default.createElement(_slot2.default, { slot: slot, index: i, key: i, dropCard: dropCard });
 				})
 			);
-		}
-	}, {
-		key: 'componentWillReceiveProps',
-		value: function componentWillReceiveProps(nextProps) {
-			console.log(nextProps.slots);
-			console.log(this.props.slots);
 		}
 	}]);
 
@@ -1132,6 +1182,8 @@ var lifeCreatures = [healer, monk, elemental, bishop, angel];
 
 exports.default = lifeCreatures;
 
+//add polymorph creature that can become any other creature or become the creature same as in opposite slot
+
 },{"../creature":17}],22:[function(require,module,exports){
 'use strict';
 
@@ -1242,7 +1294,6 @@ var heroTop = {
 		life: 5,
 		death: 4
 	},
-	// cards: [waterCreatures],
 	cards: [].concat(_toConsumableArray(_fcreatures2.default), _toConsumableArray(_acreatures2.default), _toConsumableArray(_wcreatures2.default), _toConsumableArray(_ecreatures2.default), _toConsumableArray(_lcreatures2.default), _toConsumableArray(_dcreatures2.default)),
 	used_card: false,
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
@@ -1261,7 +1312,6 @@ var hero2 = {
 		life: 3,
 		death: 5
 	},
-	// cards: [waterCreatures],
 	cards: [].concat(_toConsumableArray(_fcreatures2.default), _toConsumableArray(_acreatures2.default), _toConsumableArray(_wcreatures2.default), _toConsumableArray(_ecreatures2.default), _toConsumableArray(_lcreatures2.default), _toConsumableArray(_dcreatures2.default)),
 	used_card: false,
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']

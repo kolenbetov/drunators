@@ -15,3 +15,5 @@ const angel = new Creature('life', 'angel', 10, 5, 25, angelImg);
 const lifeCreatures = [healer, monk, elemental, bishop, angel];
 
 export default lifeCreatures;
+
+//add polymorph creature that can become any other creature or become the creature same as in opposite slot
