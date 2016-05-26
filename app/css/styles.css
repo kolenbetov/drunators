@@ -1,5 +1,5 @@
 body {
-  background: green; }
+  background: #343637; }
 
 button {
   cursor: pointer; }
@@ -18,7 +18,7 @@ button {
 .arena {
   border: 1px solid yellow;
   margin: 0 auto;
-  height: 200px;
+  height: 300px;
   width: 80%;
   position: relative; }
 
@@ -98,10 +98,12 @@ button[disabled] {
   position: absolute; }
 
 .slot {
-  border: 1px solid white;
+  border: 1px solid #403F3F;
   width: 18%;
   display: inline-block;
-  background: grey; }
+  background-image: url("../images/bg.png");
+  background-size: 100%;
+  background-color: grey; }
 
 .hero-image img {
   width: auto;
@@ -139,11 +141,48 @@ button[disabled] {
 .card-in-deck {
   display: inline-block;
   position: relative;
-  width: 20%; }
+  width: 20%;
+  -webkit-transition: all 0.7s ease;
+  transition: all 0.7s ease; }
+  .card-in-deck img:hover {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2); }
+  .card-in-deck img {
+    -webkit-transition: all 0.7s ease;
+    transition: all 0.7s ease; }
+
+.card-in-deck:hover {
+  -webkit-box-shadow: 0px 0px 15px 10px rgba(192, 192, 192, 0.7);
+  box-shadow: 0px 0px 15px 10px rgba(192, 192, 192, 0.7); }
 
 .card {
   position: relative;
-  width: 100%; }
+  width: 100%;
+  /* on hover we animate the width to
+ * 100% and opacity to 0 so the element
+ * grows and fades out 
+ */ }
+  .card :after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none; }
+  .card :hover:after {
+    width: 120%;
+    background-color: rgba(255, 255, 255, 0);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out; }
 
 .card img {
   max-width: 100%;
@@ -151,19 +190,42 @@ button[disabled] {
 
 .card-name {
   position: absolute;
-  color: grey;
+  color: #403F3F;
   top: 0; }
 
 .creature-attack {
   position: absolute;
-  color: grey;
+  color: red;
   bottom: 0;
   left: 0;
-  border: 1px solid white; }
+  border: 1px solid white;
+  border-radius: 50%; }
 
 .creature-health {
   position: absolute;
-  color: grey;
+  color: gold;
   bottom: 0;
   right: 0;
-  border: 1px solid white; }
+  border: 1px solid white;
+  border-radius: 50%; }
+
+.example-enter {
+  opacity: 0.01; }
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in; }
+
+.example-leave {
+  opacity: 1; }
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in; }
+
+.example-appear {
+  opacity: 0.01; }
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in; }

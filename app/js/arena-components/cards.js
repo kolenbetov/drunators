@@ -1,10 +1,10 @@
-var React = require('react');
-var HTML5Backend = require('react-dnd-html5-backend');
-var DragDropContext = require('react-dnd').DragDropContext;
-const Card = require('./card-in-deck');
+import React from 'react';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
+import Card from './card-in-deck';
 
-const Cards = React.createClass ({
-	render: function () {	
+export default class Cards extends React.Component{
+	render() {	
 		const cards = this.props.cards;
 
 		return (
@@ -15,6 +15,4 @@ const Cards = React.createClass ({
 			</div>
 		);
 	}
-});
-
-module.exports = Cards;
+};

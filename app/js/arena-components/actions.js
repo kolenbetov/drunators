@@ -1,16 +1,14 @@
-var React = require('react');
-var Elements = require('./elements');
-var Slots = require('./slots');
+import React from 'react';
+import Elements from './elements';
+import Slots from './slots';
 
-const Actions = React.createClass({
-	render: function () {
+export default class Actions extends React.Component{
+	render() {
 		return (
 			<div className="actions height100">
 				<Elements elements={this.props.elements} cards={this.props.cards} half={this.props.half} disabled={this.props.disabled} />
-				<Slots slots={this.props.slots} />
+				<Slots slots={this.props.slots} dropCard={this.props.dropCard} />
 			</div>
 		);
 	}
-});
-
-module.exports = Actions;
+};

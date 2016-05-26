@@ -1,8 +1,8 @@
-var React = require('react');
+import React from 'react';
 
-module.exports = React.createClass ({
-	render: function () {
-	const image = 'app/images/heroes/' + this.props.id + '.png';
+export default class Avatar extends React.Component{
+	render() {
+		const image = 'app/images/heroes/' + this.props.id + '.png';
 
 		return (
 				<div className="avatar height100">
@@ -10,9 +10,9 @@ module.exports = React.createClass ({
 						<img src={image} alt={this.props.name} />
 					</div>
 					<div className="hero-name bottom">
-						{this.props.name}
+						{this.props.name} {this.props.health}
 					</div>
 				</div>
-			);
+		);
 	}
-});
+};

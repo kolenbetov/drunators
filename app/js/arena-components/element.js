@@ -1,9 +1,14 @@
-var React = require('react');
-var Cards = require('./cards');
-var renderSubtreeIntoContainer = require('react-dom').unstable_renderSubtreeIntoContainer;
+import React from 'react';
+import Cards from './cards';
+import { unstable_renderSubtreeIntoContainer as renderSubtreeIntoContainer } from 'react-dom';
 
-var Element = React.createClass ({
-	render: function () {
+export default class Element extends React.Component{
+		constructor() {
+		super();
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	render() {
 		const className = 'element element-' + this.props.el + ' height100';
 		
 		return (
@@ -11,13 +16,10 @@ var Element = React.createClass ({
 				<button disabled={this.props.disabled} onClick={this.handleClick} className='height100'> {this.props.value} </button>
 			</div>
 		);
-	},
+	}
 
-	handleClick: function () {
-
+	handleClick() {
 		renderSubtreeIntoContainer(this, <Cards cards={this.props.cards} curValue={this.props.value} />, document.getElementById(this.props.half + '-player-cards'));	
 		document.getElementById(this.props.half + '-player-deck').style.display = 'initial';
 	}
-});
-
-module.exports = Element;
+};

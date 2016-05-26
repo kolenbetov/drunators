@@ -1,14 +1,13 @@
-var React = require('react');
-var ItemTypes = require('./constants').ItemTypes;
-var DropTarget = require('react-dnd').DropTarget;
-import { connect } from 'react-redux';
+import React from 'react';
+import { ItemTypes } from './constants';
+import { DropTarget } from 'react-dnd';
 import { putCreature } from '../actions/actions';
-var Card =require('./card');
+import Card from './card';
  
 const slotTarget = {
 	drop: function (props, monitor) {
         const draggedObject = monitor.getItem();
-        props.dispatch(putCreature(draggedObject.card, props.index));
+        props.dropCard(draggedObject.card, props.index);
 	},
 
     canDrop: function (props, monitor) {
@@ -24,8 +23,8 @@ function collect(connect, monitor) {
   };
 }
 
-var Slot = React.createClass ({
-  renderOverlay: function (color) {
+class Slot extends React.Component{
+  renderOverlay(color) {
     return (
       <div style={{
         top: 0,
@@ -37,19 +36,20 @@ var Slot = React.createClass ({
         backgroundColor: color,
       }} />
     );
-  },
+  }
 	
-	render: function () {
-	const canDrop = this.props.canDrop;
-	const isOver = this.props.isOver;
-	const connectDropTarget = this.props.connectDropTarget;
-	const isActive = canDrop && isOver;
-        let slotValue = this.props.slot === 'empty' ? null : <Card card={this.props.slot} />;
+	render() {
+	 const canDrop = this.props.canDrop;
+	 const isOver = this.props.isOver;
+	 const connectDropTarget = this.props.connectDropTarget;
+	 const isActive = canDrop && isOver;
+    let slotValue = this.props.slot === 'empty' ? null : <Card card={this.props.slot} />;
 
 		return connectDropTarget(
-				<div className="slot height100"> {slotValue} { isActive && this.renderOverlay('green') } </div>
-			);
+				<div className="slot height100"> {slotValue} { isActive && this.renderOverlay('white') } </div>
+		);
 	}
-});
+};
 
-module.exports = connect()(DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot));
+export default DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot);
+// module.exports = connect()(DropTarget(ItemTypes.CARD, slotTarget, collect)(Slot));
