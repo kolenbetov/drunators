@@ -13,8 +13,8 @@ class Arena extends React.Component{
   }
 
   render() {
-  	const heroTop = this.props.heroes[0];
-  	const heroBottom = this.props.heroes[1];
+  	const heroTop = this.props.heroes.get(0);
+  	const heroBottom = this.props.heroes.get(1);
 
     return (
       <div className="arena">
