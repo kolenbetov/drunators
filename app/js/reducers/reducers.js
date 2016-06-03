@@ -3,7 +3,7 @@ import Creature from '../creatures/creature';
 import  fireCreatures  from '../creatures/fire/fcreatures';
 import  airCreatures  from '../creatures/air/acreatures';
 import  waterCreatures  from '../creatures/water/wcreatures';
-import  earthCreatures  from '../creatures/earth/ecreatures';
+import earthCreatures  from '../creatures/earth/ecreatures';
 import  lifeCreatures  from '../creatures/life/lcreatures';
 import  deathCreatures  from '../creatures/death/dcreatures';
 
@@ -48,7 +48,7 @@ const heroAttack = (state, attack, defense) => {
 	state[attack].slots.forEach((slot, i) => {
 		if(slot !== 'empty') {
 			slot.firstTurn ? slot.firstTurn = false : slot.doAttack(state[defense], i);
-		} 
+		}
 	});
 	return state;
 };
@@ -59,7 +59,7 @@ const createCreature = (card) => {
 
 export default function arena(state = [heroTop, hero2], action) {
 	switch (action.type) {
-		case HERO_ATTACK: 
+		case HERO_ATTACK:
 			var active;
 			var inactive;
 			state.forEach((hero, i) => {
@@ -78,9 +78,9 @@ export default function arena(state = [heroTop, hero2], action) {
 				}
                 hero.used_card = false;
 				hero.active = !hero.active;
-				return hero;				
+				return hero;
 			});
-		case PUT_CREATURE: 
+		case PUT_CREATURE:
 			return state.map(hero => {
 				if (hero.active) {
 					hero.slots[action.slotIndex] = createCreature(action.creature);
@@ -89,7 +89,7 @@ export default function arena(state = [heroTop, hero2], action) {
 				}
 				return hero;
 			});
-		default: 
+		default:
 			return state;
 	}
 }
