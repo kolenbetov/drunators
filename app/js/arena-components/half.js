@@ -9,15 +9,15 @@ export default class Half extends React.Component{
 
 		return (
 			<div className={className} >
-				<Avatar name={hero.name} id={hero.id} health={hero.health} />
-				<Actions elements={hero.elements} cards={hero.cards} slots={hero.slots} half={this.props.half} disabled={!hero.active} dropCard={this.props.dropCard} />
+				<Avatar name={hero.get('name')} id={hero.get('id')} health={hero.get('health')} />
+				<Actions elements={hero.get('elements')} cards={hero.get('cards')} slots={hero.get('slots')} half={this.props.half} disabled={!hero.get('active')} dropCard={this.props.dropCard} />
 			</div>
 		);
 	}
 
-	// componentWillReceiveProps(nextProps) {      
- //    	console.log(nextProps.hero.health + '---' + this.props.hero.health);
- //  	}
+// componentWillReceiveProps(nextProps) {      
+//    	console.log(nextProps.hero.health + '---' + this.props.hero.health);
+//  	}
 };
 
 Half.propTypes = {
@@ -33,4 +33,5 @@ Half.propTypes = {
     }).isRequired,
 	half: PropTypes.string.isRequired,
 	dropCard: PropTypes.func.isRequired
+
 };

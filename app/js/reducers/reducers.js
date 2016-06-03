@@ -1,3 +1,4 @@
+import { Map, List } from 'immutable';
 import { END_TURN, PUT_CREATURE, HERO_ATTACK } from '../actions/actions';
 import Creature from '../creatures/creature';
 import  fireCreatures  from '../creatures/fire/fcreatures';
@@ -5,9 +6,9 @@ import  airCreatures  from '../creatures/air/acreatures';
 import  waterCreatures  from '../creatures/water/wcreatures';
 import earthCreatures  from '../creatures/earth/ecreatures';
 import  lifeCreatures  from '../creatures/life/lcreatures';
-import  deathCreatures  from '../creatures/death/dcreatures';
+import deathCreatures  from '../creatures/death/dcreatures';
 
-const heroTop = {
+const heroTop = Map({
 	id: "1",
 	name: "baltor",
 	health: 50,
@@ -23,9 +24,9 @@ const heroTop = {
 	cards: [ ...fireCreatures, ...airCreatures, ...waterCreatures, ...earthCreatures, ...lifeCreatures, ...deathCreatures ],
 	used_card: false,
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
-};
+});
 
-const hero2 = {
+const hero2 = Map({
 	id: "2",
 	name: "draopc",
 	health: 45,
@@ -41,7 +42,7 @@ const hero2 = {
 	cards: [ ...fireCreatures, ...airCreatures, ...waterCreatures, ...earthCreatures, ...lifeCreatures, ...deathCreatures ],
 	used_card: false,
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
-};
+});
 
 
 const heroAttack = (state, attack, defense) => {
@@ -57,7 +58,7 @@ const createCreature = (card) => {
 	return new Creature(card.element, card.name, card.cost, card.attack, card.health, card.img);
 };
 
-export default function arena(state = [heroTop, hero2], action) {
+export default function arena(state = List.of(heroTop, hero2), action) {
 	switch (action.type) {
 		case HERO_ATTACK:
 			var active;

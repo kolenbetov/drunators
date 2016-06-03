@@ -15,4 +15,9 @@ export default class Slots extends React.Component {
 			</div>
 		);
 	}
+
+  	// componentWillReceiveProps(nextProps) {      
+   //  	console.log(nextProps.slots);
+   //  	console.log(this.props.slots);
+  	// }
 };
