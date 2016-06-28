@@ -438,6 +438,8 @@ var Card = function (_React$Component) {
 	_createClass(Card, [{
 		key: 'render',
 		value: function render() {
+			var card = this.props.card;
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'card height100' },
@@ -445,27 +447,27 @@ var Card = function (_React$Component) {
 					'div',
 					null,
 					' ',
-					_react2.default.createElement('img', { src: this.props.card.img })
+					_react2.default.createElement('img', { src: card.get('img') })
 				),
 				_react2.default.createElement(
 					'div',
 					{ className: 'creature-attack' },
 					' ',
-					this.props.card.attack,
+					card.get('attack'),
 					' '
 				),
 				_react2.default.createElement(
 					'div',
 					{ className: 'creature-health' },
 					' ',
-					this.props.card.health,
+					card.get('health'),
 					' '
 				),
 				_react2.default.createElement(
 					'div',
 					{ className: 'card-name' },
 					' ',
-					this.props.card.name,
+					card.get('name'),
 					' '
 				)
 			);
@@ -534,7 +536,7 @@ var Cards = function (_React$Component) {
 				'div',
 				null,
 				cards.map(function (card) {
-					return _react2.default.createElement(_cardInDeck2.default, { card: card, key: card.name, disabled: card.cost > _this2.props.curValue });
+					return _react2.default.createElement(_cardInDeck2.default, { card: card, key: card.get('name'), disabled: card.get('cost') > _this2.props.curValue });
 				})
 			);
 		}
@@ -732,7 +734,7 @@ var Elements = function (_React$Component) {
 
 			function sortCardsByElement(el) {
 				return cards.filter(function (card) {
-					return card.element === el;
+					return card.get('element') === el;
 				});
 			};
 
@@ -1000,32 +1002,58 @@ exports.default = Slots;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
+var fairy = {
+	element: 'air',
+	name: 'fairy',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/creature_girl.png'
+};
 
-var _creature = require('../creature');
+var cloud = { //cloud takes any damage from creature in the opposite slot and disappears
+	element: 'air',
+	name: 'cloud',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/white-creature-icon.png'
+};
 
-var _creature2 = _interopRequireDefault(_creature);
+var elemental = {
+	element: 'air',
+	name: 'elemental',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/Flickr_creatures.png'
+};
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var thunderbird = {
+	element: 'air',
+	name: 'thunderbird',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/red_eyes_creature.png'
+};
 
-var fairyImg = 'app/images/creatures/creature_girl.png';
-var cloudImg = 'app/images/creatures/white-creature-icon.png';
-var elementalImg = 'app/images/creatures/Flickr_creatures.png';
-var thunderbirdImg = 'app/images/creatures/red_eyes_creature.png';
-var winderImg = 'app/images/creatures/tie-creature-icon.png';
-
-var fairy = new _creature2.default('air', 'fairy', 2, 2, 10, fairyImg);
-var cloud = new _creature2.default('air', 'cloud', 1, 0, 2, cloudImg); //cloud takes any damage from creature in the opposite slot and disappears
-var elemental = new _creature2.default('air', 'elemental', 6, 4, 12, elementalImg);
-var thunderbird = new _creature2.default('air', 'thunderbird', 9, 6, 24, thunderbirdImg);
-var winder = new _creature2.default('air', 'winder', 10, 5, 25, winderImg);
+var winder = {
+	element: 'air',
+	name: 'winder',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/tie-creature-icon.png'
+};
 
 var airCreatures = [fairy, cloud, elemental, thunderbird, winder];
 
 exports.default = airCreatures;
 
-},{"../creature":17}],17:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1083,113 +1111,217 @@ exports.default = Creature;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
+var skeleton = {
+	element: 'death',
+	name: 'skeleton',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/red_eyes_creature.png'
+};
 
-var _creature = require('../creature');
+var zombie = {
+	element: 'death',
+	name: 'zombie',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/green_red_eyes.png'
+};
 
-var _creature2 = _interopRequireDefault(_creature);
+var lich = {
+	element: 'death',
+	name: 'lich',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/Glasses-Creature-icon.png'
+};
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var sorcerer = {
+	element: 'death',
+	name: 'sorcerer',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/black-creature-icon.png'
+};
 
-var skeletonImg = 'app/images/creatures/red_eyes_creature.png';
-var zombieImg = 'app/images/creatures/green_red_eyes.png';
-var lichImg = 'app/images/creatures/Glasses-Creature-icon.png';
-var sorcererImg = 'app/images/creatures/black-creature-icon.png';
-var darkKnightImg = 'app/images/creatures/black-creature.ico';
-
-var skeleton = new _creature2.default('death', 'skeleton', 2, 2, 10, skeletonImg);
-var zombie = new _creature2.default('death', 'zombie', 1, 0, 2, zombieImg);
-var lich = new _creature2.default('death', 'lich', 6, 4, 12, lichImg);
-var sorcerer = new _creature2.default('death', 'sorcerer', 9, 6, 24, sorcererImg);
-var darkKnigth = new _creature2.default('death', 'dark knight', 10, 5, 25, darkKnightImg);
+var darkKnigth = {
+	element: 'death',
+	name: 'darkKnigth',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/black-creature.ico'
+};
 
 var deathCreatures = [skeleton, zombie, lich, sorcerer, darkKnigth];
 
 exports.default = deathCreatures;
 
-},{"../creature":17}],19:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
+var snake = {
+	element: 'earth',
+	name: 'snake',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/favicon.png'
+};
 
-var _creature = require('../creature');
+var centaur = {
+	element: 'earth',
+	name: 'centaur',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/Ears-Creature-icon.png'
+};
 
-var _creature2 = _interopRequireDefault(_creature);
+var elemental = {
+	element: 'earth',
+	name: 'elemental',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/green-creature-icon.png'
+};
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var elf = {
+	element: 'earth',
+	name: 'elf',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/pirate_creature.ico'
+};
 
-var snakeImg = 'app/images/creatures/favicon.png';
-var centaurImg = 'app/images/creatures/Ears-Creature-icon.png';
-var elementalImg = 'app/images/creatures/green-creature-icon.png';
-var elfImg = 'app/images/creatures/pirate_creature.ico';
-var dragonImg = 'app/images/creatures/dragon-creature.png';
-
-var snake = new _creature2.default('earth', 'snake', 2, 2, 10, snakeImg);
-var centaur = new _creature2.default('earth', 'centaur', 1, 0, 2, centaurImg);
-var elemental = new _creature2.default('earth', 'elemental', 6, 4, 12, elementalImg);
-var elf = new _creature2.default('earth', 'elf', 9, 6, 24, elfImg);
-var dragon = new _creature2.default('earth', 'dragon', 10, 5, 25, dragonImg);
+var dragon = {
+	element: 'earth',
+	name: 'dragon',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/dragon-creature.png'
+};
 
 var earthCreatures = [snake, centaur, elemental, elf, dragon];
 
 exports.default = earthCreatures;
 
-},{"../creature":17}],20:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
+var demon = {
+	element: 'fire',
+	name: 'demon',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/pink-creature-icon.png'
+};
 
-var _creature = require('../creature');
+var cerber = {
+	element: 'fire',
+	name: 'cerber',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/astrid.png'
+};
 
-var _creature2 = _interopRequireDefault(_creature);
+var elemental = {
+	element: 'fire',
+	name: 'elemental',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/fire_creature.png'
+};
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var phoenix = {
+	element: 'fire',
+	name: 'phoenix',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/red_creature.png'
+};
 
-var demonImg = 'app/images/creatures/pink-creature-icon.png';
-var cerberImg = 'app/images/creatures/astrid.png';
-var elementalImg = 'app/images/creatures/fire_creature.png';
-var phoenixImg = 'app/images/creatures/red_creature.png';
-var devilImg = 'app/images/creatures/creature_boy.png';
-
-var demon = new _creature2.default('fire', 'demon', 2, 2, 10, demonImg);
-var cerber = new _creature2.default('fire', 'cerber', 4, 4, 14, cerberImg);
-var elemental = new _creature2.default('fire', 'elemental', 6, 4, 12, elementalImg);
-var phoenix = new _creature2.default('fire', 'phoenix', 9, 6, 24, phoenixImg);
-var devil = new _creature2.default('fire', 'devil', 10, 5, 25, devilImg);
+var devil = {
+	element: 'fire',
+	name: 'devil',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/creature_boy.png'
+};
 
 var fireCreatures = [demon, cerber, elemental, phoenix, devil];
 
 exports.default = fireCreatures;
 
-},{"../creature":17}],21:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+	value: true
 });
+var healer = {
+	element: 'life',
+	name: 'healer',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/brown-creature-icon.png'
+};
 
-var _creature = require('../creature');
+var monk = {
+	element: 'life',
+	name: 'monk',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/Scar-Creature-icon.png'
+};
 
-var _creature2 = _interopRequireDefault(_creature);
+var elemental = {
+	element: 'life',
+	name: 'elemental',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/orange-creature-icon.png'
+};
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var bishop = {
+	element: 'life',
+	name: 'bishop',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/BlackPower-creature-icon.png'
+};
 
-var healerImg = 'app/images/creatures/brown-creature-icon.png';
-var monkImg = 'app/images/creatures/Scar-Creature-icon.png';
-var elementalImg = 'app/images/creatures/orange-creature-icon.png';
-var bishopImg = 'app/images/creatures/BlackPower-creature-icon.png';
-var angelImg = 'app/images/creatures/BigEyes-Creature-icon.png';
-
-var healer = new _creature2.default('life', 'healer', 2, 2, 10, healerImg);
-var monk = new _creature2.default('life', 'monk', 1, 0, 2, monkImg);
-var elemental = new _creature2.default('life', 'elemental', 6, 4, 12, elementalImg);
-var bishop = new _creature2.default('life', 'bishop', 9, 6, 24, bishopImg);
-var angel = new _creature2.default('life', 'angel', 10, 5, 25, angelImg);
+var angel = {
+	element: 'life',
+	name: 'angel',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img: 'app/images/creatures/BigEyes-Creature-icon.png'
+};
 
 var lifeCreatures = [healer, monk, elemental, bishop, angel];
 
@@ -1197,7 +1329,7 @@ exports.default = lifeCreatures;
 
 //add polymorph creature that can become any other creature or become the creature same as in opposite slot
 
-},{"../creature":17}],22:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

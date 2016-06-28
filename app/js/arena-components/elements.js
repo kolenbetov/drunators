@@ -9,7 +9,7 @@ export default class Elements extends React.Component{
 
 		function sortCardsByElement(el) {
 			return cards.filter(card => {
-				return card.element === el;
+				return card.get('element') === el;
 			});
 		};
 

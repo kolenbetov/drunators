@@ -10,7 +10,7 @@ export default class Cards extends React.Component{
 		return (
 			<div>
 				{cards.map(card => {
-					return (<Card card={card} key={card.name} disabled={card.cost > this.props.curValue} />);
+					return (<Card card={card} key={card.get('name')} disabled={card.get('cost') > this.props.curValue} />);
 				})}
 			</div>
 		);
