@@ -1,4 +1,4 @@
-import { Map, List } from 'immutable';
+import { Map, List, fromJS } from 'immutable';
 import { END_TURN, PUT_CREATURE, HERO_ATTACK } from '../actions/actions';
 import Creature from '../creatures/creature';
 import  fireCreatures  from '../creatures/fire/fcreatures';
@@ -8,7 +8,7 @@ import earthCreatures  from '../creatures/earth/ecreatures';
 import  lifeCreatures  from '../creatures/life/lcreatures';
 import deathCreatures  from '../creatures/death/dcreatures';
 
-const heroTop = Map({
+const heroTop = fromJS({
 	id: "1",
 	name: "baltor",
 	health: 50,
@@ -26,7 +26,7 @@ const heroTop = Map({
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
 });
 
-const hero2 = Map({
+const hero2 = fromJS({
 	id: "2",
 	name: "draopc",
 	health: 45,
@@ -45,10 +45,10 @@ const hero2 = Map({
 });
 
 
-const heroAttack = (state, attack, defense) => {
-	state[attack].slots.forEach((slot, i) => {
+const heroAttack = (state, attackerIdx, defenderIdx) => {
+	state.getIn([attackerIdx, 'slots']).forEach((slot, i) => {
 		if(slot !== 'empty') {
-			slot.firstTurn ? slot.firstTurn = false : slot.doAttack(state[defense], i);
+			slot.firstTurn ? slot.firstTurn = false : slot.doAttack(state.get(defenderIdx), i);
 		}
 	});
 	return state;
@@ -64,29 +64,31 @@ export default function arena(state = List.of(heroTop, hero2), action) {
 			var active;
 			var inactive;
 			state.forEach((hero, i) => {
-				if (hero.active) { active = i }
-				else if (!hero.active) {inactive = i }
+				if (hero.get('active')) { active = i }
+				else if (!hero.get('active')) { inactive = i }
 			});
-			let stateCopy = state.slice(0);
-			heroAttack(stateCopy, active, inactive)
-			return stateCopy;
+			state = heroAttack(state, active, inactive);
+			// let stateCopy = state.slice(0);
+			// heroAttack(stateCopy, active, inactive)
+			return state;
 		case END_TURN:
 			return state.map(hero => {
-				if (hero.active) {
-					for(let prop in hero.elements) {
-						hero.elements[prop] += 1;
-					}
+				if (hero.get('active')) {
+					hero = hero.set('elements', hero.get('elements').valueSeq().map(val => {
+						return val + 1;
+					}));
+		        	hero = hero.set('used_card', false);
 				}
-                hero.used_card = false;
-				hero.active = !hero.active;
+				hero = hero.set('active', !hero.get('active'));
+
 				return hero;
 			});
 		case PUT_CREATURE:
 			return state.map(hero => {
-				if (hero.active) {
-					hero.slots[action.slotIndex] = createCreature(action.creature);
-					hero.elements[action.creature.element] -= action.creature.cost;
-					hero.used_card = true;
+				if (hero.get('active')) {
+					hero = hero.setIn(['slots', action.slotIndex], createCreature(action.creature));
+					hero = hero.setIn(['elements', action.creature.element], hero.getIn(['elements', action.creature.element]) - action.creature.cost);
+					hero = hero.set('used_card', true);
 				}
 				return hero;
 			});

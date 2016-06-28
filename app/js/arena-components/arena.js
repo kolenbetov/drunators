@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Immutable from 'immutable';
 import { connect } from 'react-redux';
 import { endTurn, heroAttack, putCreature } from '../actions/actions';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -19,9 +20,9 @@ class Arena extends React.Component{
     return (
       <div className="arena">
   		  <Half hero={heroTop} half={'top'} dropCard={this.props.onDropCard} />
-  		  <Deck player={'top'} used_card={heroTop.used_card} />
+  		  <Deck player={'top'} used_card={heroTop.get('used_card')} />
   		  <Half hero={heroBottom} half={'bottom'} dropCard={this.props.onDropCard} />
-  		  <Deck player={'bottom'} used_card={heroBottom.used_card} />
+  		  <Deck player={'bottom'} used_card={heroBottom.get('used_card')} />
   		  <button className="end" onClick={this.handleClick} text="End"> End Turn </button>
   	  </div>
     );
@@ -34,17 +35,17 @@ class Arena extends React.Component{
 };
 
 Arena.propTypes = {
-  heroes: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        health: PropTypes.number.isRequired,
-        active: PropTypes.bool.isRequired,
-        elements: PropTypes.object.isRequired,
-        cards: PropTypes.array.isRequired,
-        used_card: PropTypes.bool.isRequired,
-        slots: PropTypes.array.isRequired,
-      }).isRequired
+  heroes: PropTypes.instanceOf(Immutable.List
+      // PropTypes.shape({
+      //   id: PropTypes.string.isRequired,
+      //   name: PropTypes.string.isRequired,
+      //   health: PropTypes.number.isRequired,
+      //   active: PropTypes.bool.isRequired,
+      //   elements: PropTypes.object.isRequired,
+      //   cards: PropTypes.array.isRequired,
+      //   used_card: PropTypes.bool.isRequired,
+      //   slots: PropTypes.array.isRequired,
+      // }).isRequired
     ).isRequired,
   onDropCard: PropTypes.func.isRequired
 };

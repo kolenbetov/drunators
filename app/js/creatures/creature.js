@@ -16,20 +16,20 @@ export default class Creature {
         return slot;
     };
 
-    doAttack(oppositeHero, position) {
-        if(oppositeHero.slots[position] === 'empty') {
-            oppositeHero.health -= this.attack;
-            console.log('hero been hit by: ' + this.attack + ' hero health is: ' + oppositeHero.health);
+    doAttack(defender, slotIdx) {
+        if(defender.getIn(['slots', slotIdx] === 'empty')) {
+            defender = defender.set('health', defender.get('health') - this.attack);
+            console.log('hero been hit by: ' + this.attack + ' hero health is: ' + defender.get('health'));
         } else {
-            oppositeHero.slots[position].health -= this.attack;
-            if (oppositeHero.slots[position].health <= 0) {
-                oppositeHero.slots[position] = 'empty';
-                // doDie(oppositeHero.slots[position]);
+            defender.setIn(['slots', slotIdx, 'health'], defender.getIn(['slots', slotIdx, 'health']) - this.attack);
+            if (defender.getIn(['slots', slotIdx, 'health']) <= 0) {
+                defender.setIn(['slots', slotIdx], 'empty');
+                // doDie(defender.slots[slotIdx]);
             }
-            console.log('creature been hit by: ' + this.attack + ' creature health is: ' + oppositeHero.slots[position].health);
+            console.log('creature been hit by: ' + this.attack + ' creature health is: ' + defender.slots[slotIdx].health);
 
         }
-        return oppositeHero; 
+        return defender; 
     };
     //defence(){}
 

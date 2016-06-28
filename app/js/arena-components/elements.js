@@ -15,8 +15,8 @@ export default class Elements extends React.Component{
 
 		return (
 			<div className={className}>
-				{Object.keys(elements).map(prop => {
-					return (<Element el={prop} value={elements[prop]} cards={sortCardsByElement(prop)} half={this.props.half} disabled={this.props.disabled} key={prop} />);
+				{elements.keySeq().map(prop => {
+					return (<Element el={prop} value={elements.get(prop)} cards={sortCardsByElement(prop)} half={this.props.half} disabled={this.props.disabled} key={prop} />);
 				})}
 			</div>
 		);
