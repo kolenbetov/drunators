@@ -1,16 +1,47 @@
-import Creature from '../creature';
+const skeleton = {
+	element: 'death',
+	name: 'skeleton',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/red_eyes_creature.png'
+};
 
-const skeletonImg = 'app/images/creatures/red_eyes_creature.png';
-const zombieImg = 'app/images/creatures/green_red_eyes.png';
-const lichImg = 'app/images/creatures/Glasses-Creature-icon.png';
-const sorcererImg = 'app/images/creatures/black-creature-icon.png';
-const darkKnightImg = 'app/images/creatures/black-creature.ico';
+const zombie = {
+	element: 'death',
+	name: 'zombie',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/green_red_eyes.png'
+};
 
-const skeleton = new Creature('death', 'skeleton', 2, 2, 10, skeletonImg);
-const zombie = new Creature('death', 'zombie', 1, 0, 2, zombieImg); 
-const lich = new Creature('death', 'lich', 6, 4, 12, lichImg);
-const sorcerer = new Creature('death', 'sorcerer', 9, 6, 24, sorcererImg);
-const darkKnigth = new Creature('death', 'dark knight', 10, 5, 25, darkKnightImg);
+const lich = {
+	element: 'death',
+	name: 'lich',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/Glasses-Creature-icon.png'
+};
+
+const sorcerer = {
+	element: 'death',
+	name: 'sorcerer',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/black-creature-icon.png'
+};
+
+const darkKnigth = {
+	element: 'death',
+	name: 'darkKnigth',
+	cost: 2,
+	attack: 2,
+	health: 10,
+	img:'app/images/creatures/black-creature.ico'
+};
 
 const deathCreatures = [skeleton, zombie, lich, sorcerer, darkKnigth];
 
