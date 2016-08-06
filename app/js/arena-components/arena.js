@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react';
 import Immutable from 'immutable';
+var installDevTools = require("immutable-devtools");
 import { connect } from 'react-redux';
 import { endTurn, heroAttack, putCreature } from '../actions/actions';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import Deck from './deck';
 import Half from './half';
+
+installDevTools(Immutable);
+
 
 class Arena extends React.Component{
   constructor() {

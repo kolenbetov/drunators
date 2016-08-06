@@ -15,23 +15,24 @@ export default class Half extends React.Component{
 		);
 	}
 
-// componentWillReceiveProps(nextProps) {      
-//    	console.log(nextProps.hero.health + '---' + this.props.hero.health);
-//  	}
+componentWillReceiveProps(nextProps) {      
+   	console.log(nextProps.hero.get('health') + '---' + this.props.hero.get('health'));
+   	console.log(nextProps.hero.getIn(['slots',0, 'health']) + '---' + this.props.hero.getIn(['slots',0, 'health']));
+ 	}
 };
 
-Half.propTypes = {
-	hero: PropTypes.shape({
-    	id: PropTypes.string.isRequired,
-       	name: PropTypes.string.isRequired,
-        health: PropTypes.number.isRequired,
-        active: PropTypes.bool.isRequired,
-        elements: PropTypes.object.isRequired,
-        cards: PropTypes.array.isRequired,
-        used_card: PropTypes.bool.isRequired,
-        slots: PropTypes.array.isRequired,
-    }).isRequired,
-	half: PropTypes.string.isRequired,
-	dropCard: PropTypes.func.isRequired
+// Half.propTypes = {
+// 	hero: PropTypes.shape({
+//     	id: PropTypes.string.isRequired,
+//        	name: PropTypes.string.isRequired,
+//         health: PropTypes.number.isRequired,
+//         active: PropTypes.bool.isRequired,
+//         elements: PropTypes.object.isRequired,
+//         cards: PropTypes.array.isRequired,
+//         used_card: PropTypes.bool.isRequired,
+//         slots: PropTypes.array.isRequired,
+//     }).isRequired,
+// 	half: PropTypes.string.isRequired,
+// 	dropCard: PropTypes.func.isRequired
 
-};
+// };

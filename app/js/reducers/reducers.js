@@ -44,18 +44,30 @@ const hero2 = fromJS({
 	slots: ['empty', 'empty', 'empty', 'empty', 'empty']
 });
 
+const doAttack = (creature, defender, slotIdx) => {
+	if(defender.getIn(['slots', slotIdx]) === 'empty') {
+        defender = defender.set('health', defender.get('health') - creature.get('attack'));
+    } else {
+    	defender = defender.setIn(['slots', slotIdx, 'health'], defender.getIn(['slots', slotIdx, 'health']) - creature.get('attack'));
+    	if (defender.getIn(['slots', slotIdx]).health <= 0) {
+                defender = defender.setIn(['slots', slotIdx], 'empty');
+            }
+    }
+
+    return defender;
+};
 
 const heroAttack = (state, attackerIdx, defenderIdx) => {
 	state.getIn([attackerIdx, 'slots']).forEach((slot, i) => {
 		if(slot !== 'empty') {
-			slot.firstTurn ? slot.firstTurn = false : slot.doAttack(state.get(defenderIdx), i);
+			if(slot.get('firstTurn') === undefined) {
+				state = state.setIn([attackerIdx, 'slots', i, 'firstTurn'], false)
+			} else if (!slot.get('firstTurn')) {
+				state = state.set(defenderIdx, doAttack(slot, state.get(defenderIdx), i));
+			} 
 		}
 	});
 	return state;
-};
-
-const createCreature = (card) => {
-	return new Creature(card.element, card.name, card.cost, card.attack, card.health, card.img);
 };
 
 export default function arena(state = List.of(heroTop, hero2), action) {
@@ -74,10 +86,10 @@ export default function arena(state = List.of(heroTop, hero2), action) {
 		case END_TURN:
 			return state.map(hero => {
 				if (hero.get('active')) {
-					hero = hero.set('elements', hero.get('elements').valueSeq().map(val => {
+					hero = hero.set('elements', hero.get('elements').map(val => {
 						return val + 1;
 					}));
-		        	hero = hero.set('used_card', false);
+					hero = hero.set('used_card', false);
 				}
 				hero = hero.set('active', !hero.get('active'));
 
@@ -86,8 +98,8 @@ export default function arena(state = List.of(heroTop, hero2), action) {
 		case PUT_CREATURE:
 			return state.map(hero => {
 				if (hero.get('active')) {
-					hero = hero.setIn(['slots', action.slotIndex], createCreature(action.creature));
-					hero = hero.setIn(['elements', action.creature.element], hero.getIn(['elements', action.creature.element]) - action.creature.cost);
+					hero = hero.setIn(['slots', action.slotIndex], action.creature);
+					hero = hero.setIn(['elements', action.creature.get('element')], hero.getIn(['elements', action.creature.get('element')]) - action.creature.get('cost'));
 					hero = hero.set('used_card', true);
 				}
 				return hero;
